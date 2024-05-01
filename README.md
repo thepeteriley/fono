@@ -10,3 +10,5 @@ This R package takes as input a CSV file with two columns: epidemiological week 
 The input CSV file can optionally have multiple sheets. One sheet must be identified as the 'primary'. Correlation analysis can be performed with datasets on the other sheets. 
 
 This is an edit to the local version.
+
+And an edit to the remote version on GitHub
