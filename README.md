@@ -12,3 +12,5 @@ The input CSV file can optionally have multiple sheets. One sheet must be identi
 This is an edit to the local version.
 
 And an edit to the remote version on GitHub
+
+another local edit.
