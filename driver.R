@@ -55,8 +55,9 @@ print(plot)
 #-----------------------------------------------------------------------------
 
 # apply the CUSUM method to identify change points in the data
+# there's something wrong in the logic here...NOT WORKING!
 
-plot <- detect_change_points_cusum(smoothed_data, threshold = 5)
+plot <- detect_change_points_cusum(smoothed_data, threshold = 3)
 print(plot)
 
 #-----------------------------------------------------------------------------
