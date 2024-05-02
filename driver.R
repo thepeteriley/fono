@@ -41,3 +41,13 @@ print(plot)
 
 #-----------------------------------------------------------------------------
 
+# Compute SARIMA model for a set of dates in the time  series and plot them
+
+prediction_dates <- as.Date(c("2017-07-01", "2018-01-01", "2018-07-01"))
+plot <- plot_sarima_forecasts(data, prediction_dates, forecast_length = 12)
+print(plot)
+
+#-----------------------------------------------------------------------------
+
+
+
