@@ -53,8 +53,8 @@ plot_sarima_forecasts <- function(data, prediction_dates, forecast_length = 12) 
 
     # Add the forecast to the plot
     plot_data <- plot_data +
-      geom_line(data = forecast_df, aes(x = epi_week, y = forecast), color = "red") +
-      geom_ribbon(data = forecast_df, aes(x = epi_week, ymin = lower_95, ymax = upper_95), fill = "red", alpha = 0.2, inherit.aes = FALSE)
+      geom_line(data = forecast_df, aes(x = epi_week, y = forecast), color = "yellow") +
+      geom_ribbon(data = forecast_df, aes(x = epi_week, ymin = lower_95, ymax = upper_95), fill = "yellow", alpha = 0.2, inherit.aes = FALSE)
   }
 
   return(plot_data)

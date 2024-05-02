@@ -14,7 +14,7 @@ apply_boxcar_average(data, nsmo = 3, edge_truncate = FALSE)
 \item{edge_truncate}{A logical indicating whether to fill edge values with original values, defaults to FALSE.}
 }
 \value{
-A data frame with the original data and an additional `smoothed_count` column containing the smoothed data.
+A data frame with the original `epi_week` and `count` columns, where `count` contains the smoothed data.
 }
 \description{
 Apply a Boxcar Running Average to Data
