@@ -39,6 +39,10 @@ plot_sarima_forecasts <- function(data, prediction_dates, forecast_length = 12) 
 
     # Fit a SARIMA model to the subset data
     sarima_model <- auto.arima(ts_data, seasonal = TRUE)
+
+    # Print the SARIMA model parameters
+    cat("\nSARIMA parameters for prediction at", as.character(date), ":\n")
+    print(sarima_model)
     
     # Forecast the next `forecast_length` points
     sarima_forecast <- forecast(sarima_model, h = forecast_length)
@@ -53,8 +57,8 @@ plot_sarima_forecasts <- function(data, prediction_dates, forecast_length = 12) 
 
     # Add the forecast to the plot
     plot_data <- plot_data +
-      geom_line(data = forecast_df, aes(x = epi_week, y = forecast), color = "yellow") +
-      geom_ribbon(data = forecast_df, aes(x = epi_week, ymin = lower_95, ymax = upper_95), fill = "yellow", alpha = 0.2, inherit.aes = FALSE)
+      geom_line(data = forecast_df, aes(x = epi_week, y = forecast), color = "blue") +
+      geom_ribbon(data = forecast_df, aes(x = epi_week, ymin = lower_95, ymax = upper_95), fill = "blue", alpha = 0.2, inherit.aes = FALSE)
   }
 
   return(plot_data)
