@@ -48,7 +48,15 @@ print(plot)
 smoothed_data <- apply_boxcar_average(data, nsmo = 9, edge_truncate=TRUE)
 
 prediction_dates <- as.Date(c("2017-07-01", "2018-01-01", "2018-07-01"))
+prediction_dates <- as.Date(c("2017-03-01", "2017-10-01", "2018-04-01","2018-12-01"))
 plot <- plot_sarima_forecasts(smoothed_data, prediction_dates, forecast_length = 12)
+print(plot)
+
+#-----------------------------------------------------------------------------
+
+# apply the CUSUM method to identify change points in the data
+
+plot <- detect_change_points_cusum(smoothed_data, threshold = 5)
 print(plot)
 
 #-----------------------------------------------------------------------------
