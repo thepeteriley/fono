@@ -3,7 +3,7 @@
 #' @param data A data frame containing the time series data with a `count` column.
 #' @param nsmo The number of points to include in the moving average window, defaults to 3.
 #' @param edge_truncate A logical indicating whether to fill edge values with original values, defaults to FALSE.
-#' @return A data frame with the original data and an additional `smoothed_count` column containing the smoothed data.
+#' @return A data frame with the original `epi_week` and `count` columns, where `count` contains the smoothed data.
 #' @export
 apply_boxcar_average <- function(data, nsmo = 3, edge_truncate = FALSE) {
   # Ensure required package is loaded
@@ -15,8 +15,8 @@ apply_boxcar_average <- function(data, nsmo = 3, edge_truncate = FALSE) {
   library(zoo)
   
   # Check that the data contains the required column
-  if (!"count" %in% names(data)) {
-    stop("The data frame must contain a 'count' column.")
+  if (!all(c("epi_week", "count") %in% names(data))) {
+    stop("The data frame must contain 'epi_week' and 'count' columns.")
   }
   
   # Apply the boxcar running average
@@ -28,9 +28,10 @@ apply_boxcar_average <- function(data, nsmo = 3, edge_truncate = FALSE) {
     smoothed[is_na] <- data$count[is_na]
   }
   
-  # Add the smoothed values to the data frame
-  data$smoothed_count <- smoothed
+  # Create a new data frame with the same labels but smoothed count values
+  result <- data
+  result$count <- smoothed
   
-  return(data)
+  return(result)
 }
 

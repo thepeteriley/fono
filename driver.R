@@ -45,10 +45,10 @@ print(plot)
 
 # let's smooth the data first
 
-smoothed_data <- apply_boxcar_average(data, nsmo = 5)
+smoothed_data <- apply_boxcar_average(data, nsmo = 5, edge_truncate=TRUE)
 
 prediction_dates <- as.Date(c("2017-07-01", "2018-01-01", "2018--01"))
-plot <- plot_sarima_forecasts(data, prediction_dates, forecast_length = 12)
+plot <- plot_sarima_forecasts(smoothed_data, prediction_dates, forecast_length = 12)
 print(plot)
 
 #-----------------------------------------------------------------------------
