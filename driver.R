@@ -23,12 +23,21 @@ R0_text <- sprintf("R0 = %.2f", R0)
 y_max = 30
 annotated_plot <- add_annotations(plot, t1, t2, R0_text, annotate_date = as.Date("2017-10-01"), y_max)
 print(annotated_plot)
+
 #-----------------------------------------------------------------------------
 
 # compute the power spectrum
 
 plot_ps <- plot_power_spectrum(data, npeak = 3)  # Adjust npeak as needed
 print(plot_ps)
+
+#-----------------------------------------------------------------------------
+
+# Compute SARIMA model and plot it
+
+plot <- plot_sarima_forecast(data, forecast_length = 12)
+print(plot)
+
 
 #-----------------------------------------------------------------------------
 
