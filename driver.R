@@ -62,5 +62,19 @@ print(plot)
 
 #-----------------------------------------------------------------------------
 
+# try several growth rate calculations:
+
+# Example usage of the function with a threshold of 20% for a more noticeable increase
+plot <- detect_growth_rate_changes(smoothed_data, threshold = 20)
+print(plot)
+
+# Example usage of the function
+plot <- detect_change_points_growth_rate(smoothed_data, threshold = 0.5)
+print(plot)
+
+#-----------------------------------------------------------------------------
+
+
+
 
 
