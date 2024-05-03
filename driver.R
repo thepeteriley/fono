@@ -8,12 +8,13 @@ data <- read_norovirus_data(main_sheet_index = 2)
 nsmo = 9
 plot <- plot_cases_w_boxcar(data, nsmo = nsmo, ytit = "Cases")
 print(plot)
+
 #-----------------------------------------------------------------------------
 
 # Now calculate R0 assumming exponential growth between t1 and t2
 
 t1 <- as.Date("2017-07-24")
-t2 <- as.Date("2017-12-25")
+t2 <- as.Date("2017-12-15")
 R0 <- calc_r0(t1, t2, data)
 R0_text <- sprintf("R0 = %.2f", R0)
 
@@ -21,10 +22,23 @@ R0_text <- sprintf("R0 = %.2f", R0)
 
 # Plotting with vertical lines at t1 and t2
 y_max = 30
-annotated_plot <- add_annotations(plot, t1, t2, R0_text, annotate_date = as.Date("2017-10-01"), y_max)
+annotated_plot <- add_annotations(plot, t1, t2, R0_text, annotate_date = t1+90, y_max)
 print(annotated_plot)
 
 #-----------------------------------------------------------------------------
+
+# add another R0 calculation
+
+t1 <- as.Date("2018-09-01")
+t2 <- as.Date("2018-12-01")
+R0 <- calc_r0(t1, t2, data)
+R0_text <- sprintf("R0 = %.2f", R0)
+y_max = 30
+annotated_plot2 <- add_annotations(annotated_plot, t1, t2, R0_text, annotate_date = t1+30, y_max)
+print(annotated_plot2)
+
+#-----------------------------------------------------------------------------
+
 
 # compute the power spectrum
 
@@ -68,13 +82,15 @@ print(plot)
 plot <- detect_growth_rate_changes(smoothed_data, threshold = 20)
 print(plot)
 
-# Example usage of the function
 plot <- detect_change_points_growth_rate(smoothed_data, threshold = 0.5)
 print(plot)
 
 #-----------------------------------------------------------------------------
 
+# Try the PELT method...
 
+plot <- detect_change_points_pelt(smoothed_data, penalty = "Manual", pen.value = 6)
+print(plot)
 
 
 
