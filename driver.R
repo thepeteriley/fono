@@ -1,12 +1,16 @@
 # Driver program to analyse, visualise, and perform basic forecasting of
 # norovirus datasets
 
-data <- read_norovirus_data(main_sheet_index = 2)
+library(devtools)
+load_all("/Users/pete/Dropbox/shared/CSMB03/norovirus-fl/fono")
+
+data <- read_norovirus_data(dataset =1, main_sheet_index = 2)
+data <- read_norovirus_data(dataset =2, main_sheet_index = 1)
 
 # Plot the data with a smoothed line
 
 nsmo = 9
-plot <- plot_cases_w_boxcar(data, nsmo = nsmo, ytit = "Cases")
+plot <- plot_cases_w_boxcar(data, nsmo = nsmo, ytit = global_ytit)
 print(plot)
 
 #-----------------------------------------------------------------------------
@@ -33,9 +37,19 @@ t1 <- as.Date("2018-09-01")
 t2 <- as.Date("2018-12-01")
 R0 <- calc_r0(t1, t2, data)
 R0_text <- sprintf("R0 = %.2f", R0)
-y_max = 30
 annotated_plot2 <- add_annotations(annotated_plot, t1, t2, R0_text, annotate_date = t1+30, y_max)
 print(annotated_plot2)
+
+#-----------------------------------------------------------------------------
+
+# add  third R0 calculation
+
+t1 <- as.Date("2022-10-15")
+t2 <- as.Date("2023-03-01")
+R0 <- calc_r0(t1, t2, data)
+R0_text <- sprintf("R0 = %.2f", R0)
+annotated_plot3 <- add_annotations(annotated_plot2, t1, t2, R0_text, annotate_date = t1+30, y_max)
+print(annotated_plot3)
 
 #-----------------------------------------------------------------------------
 
@@ -89,8 +103,28 @@ print(plot)
 
 # Try the PELT method...
 
-plot <- detect_change_points_pelt(smoothed_data, penalty = "Manual", pen.value = 6)
+plot <- detect_change_points_pelt(smoothed_data, penalty = "Manual", pen.value = 24)
 print(plot)
 
 
+#-----------------------------------------------
+
+plot_rise_1 <- identify_onset_exponential_rise_1(data, nsmo = 9)
+print(plot_rise_1)
+
+#-----------------------------------------------
+
+plot <- identify_onset_exponential_rise(data, nsmo = 9, threshold_multiplier = 2)
+print(plot)
+
+#-----------------------------------------------
+
+# something even simpler: we'll take two pieces of information:
+# first, where the first derivative is zero is where there is either
+# a peak or a trough, but this must be coupled with the sign of the
+# second derivative. If the sign is positive, then it means that it is a trough.
+# These are the only points that we want to identify.
+
+plot <- identify_troughs(data, nsmo = 24)
+print(plot)
 

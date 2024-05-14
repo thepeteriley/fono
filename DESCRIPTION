@@ -17,5 +17,6 @@ Imports:
     forecast,
     tseries,
     magrittr,
-    zoo
+    zoo, 
+    ISOweek
 RoxygenNote: 7.3.1

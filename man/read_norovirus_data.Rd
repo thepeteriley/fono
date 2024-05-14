@@ -4,10 +4,14 @@
 \alias{read_norovirus_data}
 \title{Read Norovirus Data from Excel File}
 \usage{
-read_norovirus_data(main_sheet_index = 2)
+read_norovirus_data(dataset = 1, main_sheet_index = 2)
 }
 \arguments{
+\item{dataset}{The dataset to be read in (default is 2)}
+
 \item{main_sheet_index}{The index of the sheet to read (default is 2)}
+
+\item{ytit}{The title of the y axis based on the sheet/dataset read in (default is "ytit")}
 }
 \value{
 A data frame with norovirus data

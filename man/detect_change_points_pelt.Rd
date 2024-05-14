@@ -4,12 +4,14 @@
 \alias{detect_change_points_pelt}
 \title{Detect Change Points using PELT and Plot Results}
 \usage{
-detect_change_points_pelt(data, penalty = "BIC")
+detect_change_points_pelt(data, penalty = "BIC", pen.value = NULL)
 }
 \arguments{
 \item{data}{A data frame containing a time series of data with `epi_week` and `count` columns.}
 
-\item{penalty}{The penalty value used in the PELT method to avoid overfitting, defaults to "BIC".}
+\item{penalty}{The type of penalty used in the PELT method to avoid overfitting, defaults to "BIC".}
+
+\item{pen.value}{A numeric value used to adjust the sensitivity of change point detection.}
 }
 \value{
 A ggplot object with change points marked, and prints the dates of change points.
