@@ -7,7 +7,7 @@ load_all("/Users/pete/Dropbox/shared/CSMB03/norovirus-fl/fono")
 data1 <- read_norovirus_data(dataset =1, main_sheet_index = 2)
 data2 <- read_norovirus_data(dataset =2, main_sheet_index = 1)
 
-data4anal = data1
+data4anal = data2
 
 # Plot the data with a smoothed line
 
@@ -132,8 +132,7 @@ print(plot)
 
 # do a spline fit
 
-nspline = round(nrow(data4anal)/100)*25
-
+nspline = round(nrow(data4anal)/100)*15
 # Fit spline with specified number of splines (e.g., 5)
 data4anal_rev <- fit_spline(data4anal, num_splines = nspline)
 
