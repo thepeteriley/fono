@@ -28,6 +28,7 @@ read_norovirus_data <- function(dataset = 1, main_sheet_index = 2) {
   sheets <- readxl::excel_sheets(file_path)
   data_list <- lapply(sheets, function(sheet) readxl::read_excel(file_path, sheet = sheet))
 
+
   # Set ytit based on main_sheet_index and dataset
 
   if (dataset == 1) {
@@ -50,29 +51,31 @@ read_norovirus_data <- function(dataset = 1, main_sheet_index = 2) {
 
   global_ytit <<- ytit # define a global ytit variable for plotting purposes
 
-  data <- data_list[[main_sheet_index]]
+  my_data <- data_list[[main_sheet_index]]
 
   # Assign column names manually since the first row with data does not include headers
-  names(data) <- c("epi_year_week", "count")
+  names(my_data) <- c("epi_year_week", "count")
 
   # in the second dataset, the epi-weeks are not padded if <10, so fix that
   # here:
 
 # Assuming 'epi_year_week' is in the format "YYYY-W" or "YYYY-WW"
-data$epi_year_week_padded <- sprintf("%s-%02d",
-                             substr(data$epi_year_week, 1, 4),  # Extract the year part
-                             as.numeric(substr(data$epi_year_week, 6, 7)))  # Extract the week part correctly
+my_data$epi_year_week_padded <- sprintf("%s-%02d",
+                             substr(my_data$epi_year_week, 1, 4),  # Extract the year part
+                             as.numeric(substr(my_data$epi_year_week, 6, 7)))  # Extract the week part correctly
+
+# browser()  # Execution will stop here
 
   # Convert epi week format 'yyyy-ww' to Date class in R
   # This is the old way - didn't work for 2020 because of leap year
-  # data$epi_week <- as.Date(paste0(data$epi_year_week_padded, "-1"), format = "%Y-%W-%u")
+  my_data$epi_week <- as.Date(paste0(my_data$epi_year_week_padded, "-1"), format = "%Y-%W-%u")
 
   # michal's approach
-  data$date <- as.numeric(epitools::as.week(data$epi_year_week_padded))
+  #my_data$epi_week2 <- as.numeric(epitools::as.week(my_data$epi_year_week_padded))
 
   # Sort data by date in increasing order
-  data <- data[order(data$epi_year_week), ]
+  my_data <- my_data[order(my_data$epi_year_week), ]
 
-  return(data)
+  return(my_data)
 }
 
