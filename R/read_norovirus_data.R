@@ -68,10 +68,17 @@ my_data$epi_year_week_padded <- sprintf("%s-%02d",
 
   # Convert epi week format 'yyyy-ww' to Date class in R
   # This is the old way - didn't work for 2020 because of leap year
-  my_data$epi_week <- as.Date(paste0(my_data$epi_year_week_padded, "-1"), format = "%Y-%W-%u")
+  # my_data$epi_week <- as.Date(paste0(my_data$epi_year_week_padded, "-1"), format = "%Y-%W-%u")
+
+# browser()
+
+   epiYear = as.integer(substr(my_data$epi_year_week_padded, 1, 4))
+   epiWeek = as.integer(substr(my_data$epi_year_week_padded, 6, 7))
+
+   my_data$epi_week <- MMWRweek::MMWRweek2Date(MMWRyear = epiYear, MMWRweek = epiWeek, MMWRday = 1)
 
   # michal's approach
-  #my_data$epi_week2 <- as.numeric(epitools::as.week(my_data$epi_year_week_padded))
+  # my_data$epi_week <- as.numeric(epitools::as.date(my_data$epi_year_week_padded))
 
   # Sort data by date in increasing order
   my_data <- my_data[order(my_data$epi_year_week), ]
