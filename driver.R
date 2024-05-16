@@ -137,3 +137,11 @@ nspline = round(nrow(data4anal)/100)*15
 data4anal_rev <- fit_spline(data4anal, num_splines = nspline)
 
 #-----------------------------------------------
+
+# compute and plot wavelet heatmap
+
+time_series = data4anal$count
+plot_wavelet_heatmap(time_series, dt = 1)
+
+#-----------------------------------------------
+
