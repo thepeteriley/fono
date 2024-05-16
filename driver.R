@@ -11,9 +11,56 @@ data4anal = data2
 
 # Plot the data with a smoothed line
 
-nsmo = 9
+nsmo = 15
 plot <- plot_cases_w_boxcar(data4anal, nsmo = nsmo, ytit = global_ytit)
 print(plot)
+
+#-------------------------------------------------
+
+# get the indices of the data point min/max
+# Plot the original data
+data <- data4anal$count
+plot(data, type = "l", col = "blue", main = "Original Data with Moving Average",
+     xlab = "Index", ylab = "Count")
+# Calculate moving average
+smoothed_data <- moving_average(data, n = 10)  # Adjust 'n' to specify the smoothing window
+# Add the smoothed line to the plot
+lines(smoothed_data, col = "red", lwd = 2)  # 'lwd' is line width
+# Add a legend to the plot
+legend("topright", legend = c("Original Data", "Smoothed Data"), col = c("blue", "red"), lty = 1, lwd = 2)
+
+# grab the indices of the min/max in the data
+
+clicked_points <- capture_clicks()
+
+# max values:
+#1  13.11921 22.83230
+#2  60.40514 39.38853
+#3 106.50893 29.34912
+#4 170.93602 39.38853
+#5 213.49336 16.84388
+#6 274.37400 18.95744
+#7 329.93497 39.38853
+#8 376.03876 58.76284
+#9 425.68899 49.42795
+
+# min values
+#1  27.89606 12.088368
+#2  87.59456 12.792889
+#3 139.60909 11.031588
+#4 191.03254 12.088368
+#5 243.63814  4.162514
+#6 291.51515  7.508986
+#7 345.30290 18.781312
+#8 399.68173 26.178776
+
+i_max = c(13.11921,60.40514,106.50893,170.93602,213.49336,274.37400,329.93497,376.03876,425.68899)
+i_min = c(27.89606,87.59456,139.60909,191.03254,243.63814,291.51515,345.30290,399.68173)
+
+date_min = data4anal$epi_week[round(i_min)]
+date_max = data4anal$epi_week[round(i_max)]
+
+plot_date_histograms(date_min, date_max)
 
 #-----------------------------------------------------------------------------
 
@@ -136,6 +183,7 @@ nspline = round(nrow(data4anal)/100)*15
 # Fit spline with specified number of splines (e.g., 5)
 data4anal_rev <- fit_spline(data4anal, num_splines = nspline)
 
+plot(data4anal_rev$count_spline)
 plot(data4anal_rev$epi_week, data4anal_rev$count_spline)
 
 #-----------------------------------------------
