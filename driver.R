@@ -136,6 +136,8 @@ nspline = round(nrow(data4anal)/100)*15
 # Fit spline with specified number of splines (e.g., 5)
 data4anal_rev <- fit_spline(data4anal, num_splines = nspline)
 
+plot(data4anal_rev$epi_week, data4anal_rev$count_spline)
+
 #-----------------------------------------------
 
 # compute and plot wavelet heatmap
@@ -144,4 +146,11 @@ time_series = data4anal$count
 plot_wavelet_heatmap(time_series, dt = 1)
 
 #-----------------------------------------------
+
+# capture points on the screen
+
+clicked_points <- capture_clicks()
+
+#-----------------------------------------------
+
 
