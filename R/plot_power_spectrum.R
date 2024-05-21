@@ -25,6 +25,7 @@ plot_power_spectrum <- function(data, npeak = 2) {
   # Create the power spectrum plot with annotated peaks
   plot_ps <- ggplot2::ggplot(spec_df, ggplot2::aes(x = frequency, y = spectrum)) +
     ggplot2::geom_line() +
+    ggplot2::scale_y_log10() + 
     ggplot2::annotate("text", x = spec_df$frequency[top_n_indices] + 0.0333, 
                       y = spec_df$spectrum[top_n_indices] - 100,
                       label = paste0("Peak ", 1:npeak, ": ", round(1 / spec_df$frequency[top_n_indices], 1), " weeks"),

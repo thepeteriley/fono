@@ -11,7 +11,7 @@ data4anal = data2
 
 # Plot the data with a smoothed line
 
-nsmo = 15
+nsmo = 9
 plot <- plot_cases_w_boxcar(data4anal, nsmo = nsmo, ytit = global_ytit)
 print(plot)
 
@@ -69,7 +69,7 @@ plot_date_histograms(date_min, date_max)
 t1 <- as.Date("2017-07-24")
 t2 <- as.Date("2017-12-15")
 R0 <- calc_r0(t1, t2, data4anal)
-R0_text <- sprintf("R0 = %.2f", R0)
+R0_text <- sprintf("R = %.2f", R0)
 
 #-----------------------------------------------------------------------------
 
@@ -85,7 +85,7 @@ print(annotated_plot)
 t1 <- as.Date("2018-09-01")
 t2 <- as.Date("2018-12-01")
 R0 <- calc_r0(t1, t2, data4anal)
-R0_text <- sprintf("R0 = %.2f", R0)
+R0_text <- sprintf("R = %.2f", R0)
 annotated_plot2 <- add_annotations(annotated_plot, t1, t2, R0_text, annotate_date = t1+30, y_max)
 print(annotated_plot2)
 
@@ -96,7 +96,7 @@ print(annotated_plot2)
 t1 <- as.Date("2022-10-15")
 t2 <- as.Date("2023-03-01")
 R0 <- calc_r0(t1, t2, data4anal)
-R0_text <- sprintf("R0 = %.2f", R0)
+R0_text <- sprintf("R = %.2f", R0)
 annotated_plot3 <- add_annotations(annotated_plot2, t1, t2, R0_text, annotate_date = t1+30, y_max)
 print(annotated_plot3)
 
@@ -190,14 +190,15 @@ plot(data4anal_rev$epi_week, data4anal_rev$count_spline)
 
 # compute and plot wavelet heatmap
 
-time_series = data4anal$count
-plot_wavelet_heatmap(time_series, dt = 1)
+#time_series = data4anal$count
+#plot_wavelet_heatmap(time_series, dt = 1)
+plot_wavelet_heatmap(data4anal, dt = 1)
 
 #-----------------------------------------------
 
 # capture points on the screen
 
-clicked_points <- capture_clicks()
+# clicked_points <- capture_clicks()
 
 #-----------------------------------------------
 

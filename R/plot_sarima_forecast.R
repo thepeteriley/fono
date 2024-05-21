@@ -27,7 +27,9 @@ plot_sarima_forecast <- function(data, forecast_length = 12) {
   
   # Fit a SARIMA model to the data
   sarima_model <- auto.arima(ts_data, seasonal = TRUE)
-  
+ 
+ print(summary(sarima_model))
+
   # Forecast the next `forecast_length` points (weeks)
   sarima_forecast <- forecast(sarima_model, h = forecast_length)
   

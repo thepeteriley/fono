@@ -17,12 +17,11 @@ plot_cases_w_boxcar <- function(data, nsmo = 9, ytit = "Number of Cases") {
 
   # Create the plot
 
-
 plot <- ggplot2::ggplot(data, ggplot2::aes(x = epi_week, y = count)) +
   ggplot2::geom_line() + # Line plot
   ggplot2::geom_line(data = data %>%
   dplyr::mutate(ra = zoo::rollmean(count, k = nsmo, fill = NA)),
-  ggplot2::aes(y = ra), color = "blue") + # Adding a running average line
+  ggplot2::aes(x = epi_week, y = ra), color = "blue") + # Adding a running average line
   ggplot2::labs(title = "Norovirus cases for Polk County, Fl",
   x = "Epidemiological Week",
   y = ytit,

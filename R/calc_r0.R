@@ -16,7 +16,7 @@ calc_r0 <- function(t1, t2, data) {
 
   # Filter data to the specified time period
   data_subset <- dplyr::filter(data, epi_week >= t1 & epi_week <= t2)
-  
+
   # Prepare time and cases for R0 calculation
   data_subset <- data_subset %>% dplyr::mutate(time = as.numeric(epi_week - min(epi_week)) / 7)  # Convert to weeks
   log_cases <- log(data_subset$count)
@@ -26,11 +26,11 @@ calc_r0 <- function(t1, t2, data) {
   growth_rate <- coef(fit)['time']
   G <- 5  # Generation interval in weeks for norovirus
   R0 <- 1 + growth_rate * G
-  
+
   # Format R0 for display
-  R0_text <- sprintf("R0 = %.2f", R0)
+  R0_text <- sprintf("R = %.2f", R0)
   print(R0_text)
-  
+
   return(R0)
 }
 
