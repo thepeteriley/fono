@@ -7,6 +7,7 @@ library(devtools)
 # load_all("/Users/pete/Dropbox/shared/CSMB03/norovirus-fl/fono")
 load_all()
 
+# Line below throw an error for me and need MMWRweek package
 data1 <- read_norovirus_data(dataset =1, main_sheet_index = 2)
 data2 <- read_norovirus_data(dataset =2, main_sheet_index = 1)
 
