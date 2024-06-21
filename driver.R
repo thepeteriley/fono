@@ -2,7 +2,10 @@
 # norovirus datasets
 
 library(devtools)
-load_all("/Users/pete/Dropbox/shared/CSMB03/norovirus-fl/fono")
+# Commented out pete's path
+# Assumes current working directory is the package directory
+# load_all("/Users/pete/Dropbox/shared/CSMB03/norovirus-fl/fono")
+load_all()
 
 data1 <- read_norovirus_data(dataset =1, main_sheet_index = 2)
 data2 <- read_norovirus_data(dataset =2, main_sheet_index = 1)
